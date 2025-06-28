@@ -1,0 +1,7 @@
+name: RedKit
+version: '1.0-SNAPSHOT'
+main: org.piotrwyrw.redkit.RedKit
+api-version: '1.20'
+commands:
+  rk:
+    description: Root RedKit command

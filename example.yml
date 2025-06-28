@@ -1,0 +1,27 @@
+name: hello-world
+
+flow:
+  - trigger:
+      type: EVENT
+      options:
+        event: ENTER
+        subject: player
+        area: intro_zone
+    action:
+      steps:
+        - type: MESSAGE
+          options:
+            text: "You've entered the zone."
+        - type: EFFECT
+          options:
+            effect: speed
+            duration: 5
+            level: 1
+
+areas:
+  intro_zone:
+    from:
+      x: 10
+      y: 64
+      z: 10
+    to: [15, 70, 15]
