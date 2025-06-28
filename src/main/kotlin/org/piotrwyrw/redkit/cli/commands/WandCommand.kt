@@ -22,7 +22,7 @@ class WandCommand : Command {
         if (args.isEmpty()) {
             val item = ItemStack(Material.BLAZE_ROD)
             val meta = item.itemMeta
-            meta?.setDisplayName("&8[ &cRedKit Wand &8]".color())
+            meta?.setDisplayName("&8» &cRedKit Wand &8«".color())
             item.itemMeta = meta
             (sender as Player).inventory.addItem(item)
             StateManager.instance[sender].enableWand()

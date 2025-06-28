@@ -1,7 +1,6 @@
 package org.piotrwyrw.redkit.extensions
 
 import org.bukkit.ChatColor
-import org.bukkit.Location
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.piotrwyrw.redkit.RedKit
@@ -10,7 +9,7 @@ import java.io.File
 fun String.color() = ChatColor.translateAlternateColorCodes('&', this)
 
 private fun Player.send(value: String) {
-    sendMessage("&b&lRK &8➤ &r$value".color())
+    sendMessage("&b&lRK &8» &r$value".color())
 }
 
 fun Player.error(value: String) {

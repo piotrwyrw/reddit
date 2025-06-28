@@ -1,25 +1,12 @@
 package org.piotrwyrw.redkit.model
 
+import kotlin.math.max
+import kotlin.math.min
+
 data class ProjectStats(val name: String, val flowSize: Int, val areaCount: Int)
 
-enum class FlowType {
-    EVENT
-}
-
-enum class EventType {
-    ENTER_AREA,
-    LEAVE_AREA
-}
-
-enum class SubjectType {
-    PLAYER
-}
-
-enum class StepType {
-    MESSAGE,
-    EFFECT,
-    TELEPORT,
-    KILL
+enum class TriggerCause {
+    ENTER_AREA
 }
 
 class Project {
@@ -33,7 +20,7 @@ class FlowSection {
 }
 
 class TriggerSection {
-    lateinit var type: FlowType
+    lateinit var on: TriggerCause
     lateinit var options: Map<String, Object>
 }
 
@@ -42,7 +29,7 @@ class ActionSection {
 }
 
 class ActionStep {
-    lateinit var type: StepType
+    lateinit var type: String
     lateinit var options: Map<String, Object>
 }
 
@@ -58,6 +45,12 @@ class Point() {
     }
 }
 
+data class SelectorArea(val x: Double, val y: Double, val z: Double, val dx: Double, val dy: Double, val dz: Double) {
+    override fun toString(): String {
+        return "x=$x, y=$y, z=$z, dx=$dx, dy=$dy, dz=$dz"
+    }
+}
+
 class Area() {
     lateinit var from: Point
     lateinit var to: Point
@@ -66,4 +59,18 @@ class Area() {
         this.from = from
         this.to = to
     }
+
+    fun boundaryMax(): Point = Point(max(from.x, to.x), max(from.y, to.y), max(from.z, to.z))
+
+    fun boundaryMin(): Point = Point(min(from.x, to.x), min(from.y, to.y), min(from.z, to.z))
+
+    fun selectorArea(): SelectorArea {
+        val min = boundaryMin()
+        val max = boundaryMax()
+        val dx = max.x - min.x
+        val dy = max.y - min.y
+        val dz = max.z - min.z
+        return SelectorArea(min.x, min.y, min.z, dx, dy, dz)
+    }
+
 }
